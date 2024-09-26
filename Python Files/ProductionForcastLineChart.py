@@ -51,7 +51,7 @@ def predict_future_production(country):
 def compute_all_predictions():
     predictions = {}
     for country in countries:
-        if country not in ['WLD', 'OECD', 'G20']:  
+        if country not in ['WLD','EU28 ','G20 ','OECD']:  
             predictions[country] = predict_future_production(country)
     return predictions
 
@@ -64,7 +64,7 @@ predicted_total = []
 
 for year in range(1970, 2018):
     year_data = oil_data[oil_data['TIME'].dt.year == year]
-    data = [{"category": row['LOCATION'], "value": row['Value']} for _, row in year_data.iterrows() if row['LOCATION'] not in ['WLD', 'OECD', 'G20']]
+    data = [{"category": row['LOCATION'], "value": row['Value']} for _, row in year_data.iterrows() if row['LOCATION'] not in ['WLD','EU28 ','G20 ','OECD']]
     
     total_value = sum(item["value"] for item in data)
     historical_total.append((year, total_value))
