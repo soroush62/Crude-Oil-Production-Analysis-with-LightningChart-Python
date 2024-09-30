@@ -69,6 +69,8 @@ chart = lc.BarChart(
     title='Crude Oil Production Over Time (Stacked Bar Chart)'
 )
 
+chart.set_sorting('alphabetical') 
+
 color_map = {
     'AUS': '#FF0000',    # Red
     'CAN': '#00FF00',    # Green
@@ -91,7 +93,6 @@ for country in country_list:
 chart.set_data_stacked(x_values, stacked_data)
 
 chart.set_value_label_display_mode('hidden')
-
 chart.add_legend().add(chart)
 
-# chart.open()
+chart.open()
