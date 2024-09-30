@@ -59,3 +59,5 @@ legend.add(series_production)
 legend.add(series_prices)
 
 chart.open()
+
+

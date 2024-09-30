@@ -61,7 +61,6 @@ filtered_data = data[data['LOCATION'].isin(country_list)]
 filtered_data = filtered_data.dropna(subset=['Value'])
 
 filtered_data['TIME'] = pd.to_datetime(filtered_data['TIME'], format='%Y').dt.strftime('%Y')
-
 x_values = filtered_data['TIME'].unique().tolist()
 
 chart = lc.BarChart(
@@ -80,7 +79,6 @@ color_map = {
     'IRN': '#800080',    # Purple
     'MEX': '#FFA500'     # Orange
 }
-
 stacked_data = []
 for country in country_list:
     country_values = filtered_data[filtered_data['LOCATION'] == country]['Value'].values.tolist()
@@ -96,4 +94,4 @@ chart.set_value_label_display_mode('hidden')
 
 chart.add_legend().add(chart)
 
-chart.open()
+# chart.open()

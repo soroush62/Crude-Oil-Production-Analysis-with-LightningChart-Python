@@ -124,48 +124,38 @@ from statsmodels.tsa.arima.model import ARIMA
 import numpy as np
 import warnings
 
-# Suppress ARIMA convergence warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-# Set LightningChart license
 lc.set_license(open('../license-key').read())
 
-# Load the oil production data
 file_path = 'Dataset/DP_LIVE.xlsx'
 oil_data = pd.read_excel(file_path)
 
-# Filter and preprocess the data
 oil_data = oil_data[oil_data['Value'] > 0].dropna(subset=['Value'])
 oil_data = oil_data[(oil_data['TIME'] >= 1970) & (oil_data['TIME'] <= 2017)]
 oil_data['TIME'] = pd.to_datetime(oil_data['TIME'], format='%Y')
 
-# Pivot the data to get production by country
 pivot_tide = oil_data.pivot_table(index='TIME', columns='LOCATION', values='Value', aggfunc='sum', fill_value=0)
 countries = pivot_tide.columns
 time_values = pivot_tide.index
 
-# Initialize the dashboard
 dashboard = lc.Dashboard(theme=lc.Themes.CyberSpace, rows=2, columns=1)
 bar_chart = dashboard.BarChart(row_index=0, column_index=0)
 map_chart = dashboard.MapChart(row_index=1, column_index=0)
 
-# Function to update the charts for a specific year
 def update_charts_for_year(year, data, is_predicted=False):
     if is_predicted:
         title_suffix = 'Predicted'
     else:
         title_suffix = 'Historical'
 
-    # Update Bar Chart
     bar_chart.set_title(f'{title_suffix} Crude Oil Production by Country in Year {year}')
     bar_chart.set_data(data)
 
-    # Update Map Chart
     map_chart.invalidate_region_values([{"ISO_A3": item["category"], "value": item["value"]} for item in data])
     map_chart.set_title(f'{title_suffix} Crude Oil Production - Year {year}')
 
-    # Set color palette for the map
     map_chart.set_palette_colors(
         steps=[
             {'value': 0, 'color': lc.Color(0, 0, 255)},  # Blue
@@ -177,27 +167,24 @@ def update_charts_for_year(year, data, is_predicted=False):
         look_up_property='value',
     )
 
-# Function to apply ARIMA model and predict future oil production for a specific country
 def predict_future_production(country):
     country_data = pivot_tide[country].values
     try:
         model = ARIMA(country_data, order=(1, 1, 1))
         model_fit = model.fit()
-        forecast = model_fit.forecast(steps=10)  # Predict for the next 10 years
+        forecast = model_fit.forecast(steps=10) 
         return forecast
     except Exception as e:
         print(f"ARIMA model failed for {country}: {e}")
-        return [0] * 10  # Return zeros if the model fails
+        return [0] * 10  
 
-# Precompute predictions for all countries
 def compute_all_predictions():
     predictions = {}
     for country in countries:
-        if country != 'WLD':  # Exclude World total
+        if country != 'WLD':  
             predictions[country] = predict_future_production(country)
     return predictions
 
-# Function to prepare predicted data for a given year
 def prepare_predicted_data(year, predictions):
     predicted_data = []
     for country in predictions:
@@ -205,9 +192,7 @@ def prepare_predicted_data(year, predictions):
         predicted_data.append({"category": country, "value": predicted_value})
     return predicted_data
 
-# Function to update the dashboard for the historical data (1970-2017) and predictions (2018-2027)
 def update_dashboard(predictions):
-    # First, update the dashboard with historical data
     for year in range(1970, 2018):
         print(f"Updating historical data for year: {year}")
         year_data = oil_data[oil_data['TIME'].dt.year == year]
@@ -215,18 +200,15 @@ def update_dashboard(predictions):
         update_charts_for_year(year, data)
         time.sleep(2)
 
-    # Then, update the dashboard with predicted data
-    for year in range(2018, 2028):  # Predict up to 2027
+    for year in range(2018, 2028): 
         print(f"Updating predicted data for year: {year}")
         predicted_data = prepare_predicted_data(year, predictions)
         update_charts_for_year(year, predicted_data, is_predicted=True)
-        time.sleep(2)  # Faster updates during prediction
+        time.sleep(2)  
 
-# First, compute all predictions for the years 2018-2027 before starting the visualization
 print("Computing predictions for 2018-2027...")
 predictions = compute_all_predictions()
 print("Predictions complete. Starting visualization...")
 
-# Open the dashboard and start the update process
 dashboard.open(live=True)
 update_dashboard(predictions)

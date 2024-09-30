@@ -15,6 +15,7 @@ countries = year_data['LOCATION'].values.tolist()
 production_values = year_data['Value'].values.tolist()
 
 chart = lc.PieChart(title='Crude Oil Production Breakdown by Country in 2011',theme=lc.Themes.Light)
+chart.set_slice_stroke(color=lc.Color('white'),thickness=1)
 
 for i, country in enumerate(countries):
     random_color = lc.Color(randint(0, 255), randint(0, 255), randint(0, 255))
