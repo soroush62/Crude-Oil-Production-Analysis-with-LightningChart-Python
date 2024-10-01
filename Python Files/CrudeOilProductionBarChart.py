@@ -94,5 +94,5 @@ chart.set_data_stacked(x_values, stacked_data)
 
 chart.set_value_label_display_mode('hidden')
 chart.add_legend().add(chart)
-
+chart.set_label_rotation(45)
 chart.open()

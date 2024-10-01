@@ -9,7 +9,7 @@ production_file_path = 'Dataset/DP_LIVE.xlsx'
 prices_file_path = 'Dataset/Oil Prices by Year.xlsx'
 
 oil_data = pd.read_excel(production_file_path)
-oil_data = oil_data[(oil_data['Value'] > 0) & (~oil_data['LOCATION'].isin(['WLD','EU28 ','G20 ','OECD']))].dropna(subset=['Value'])
+oil_data = oil_data[(oil_data['Value'] > 0) & (oil_data['LOCATION'].isin(['WLD']))].dropna(subset=['Value'])
 
 oil_data['TIME'] = pd.to_datetime(oil_data['TIME'], format='%Y')
 pivot_production = oil_data.pivot_table(index=oil_data['TIME'].dt.year, values='Value', aggfunc='sum').reset_index()
@@ -59,5 +59,3 @@ legend.add(series_production)
 legend.add(series_prices)
 
 chart.open()
-
-
