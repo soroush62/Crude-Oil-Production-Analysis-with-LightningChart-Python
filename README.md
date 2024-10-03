@@ -145,7 +145,8 @@ chart.open()
 ```
 ![](Images/Crude_Oil_Production_Breakdown_by_Country_in_2011.png)
 
-3. **Line Chart (Crude Oil Production Over Time for Multiple Countries)**: Reveals the production trends from 1970 to 2017, showing the decline in some countries and steady growth in the USA.
+3. **Line Chart (Crude Oil Production Over Time for Multiple Countries)**: 
+A line chart is used to display crude oil production trends for multiple countries over time. It clearly shows the decreasing trend of oil production in some countries starting around the 1980s. This chart is useful for comparing production rates between countries over a prolonged period and highlights the steady growth of the USA compared to fluctuations in other countries.
 
 #### Script Summary:
 ```python
@@ -172,7 +173,8 @@ chart.open()
 ```
 ![](Images/Crude_Oil_Production_Over_Time_LineChart.png)
 
-4. **Area Chart (Cumulative Crude Oil Production Over Time)**: Visualizes cumulative oil production over time, emphasizing the USA and Russia’s contributions.
+4. **Area Chart (Cumulative Crude Oil Production Over Time)**: 
+The area chart visualizes cumulative crude oil production across selected countries. This type of chart emphasizes the overall volume of production and how it has evolved over time. The cumulative aspect allows us to see how the total production grows over the years, with key contributors like the USA and Russia showing the most significant increases.
 
 #### Script Summary:
 ```python
@@ -201,7 +203,8 @@ chart.add_legend(data=chart).open()
 ```
 ![](Images/Cumulative_Crude_Oil_Production_Over_Time_Across_Countries.png)
 
-5. **Combination Chart (Yearly Growth Rate of Oil Production and Oil Prices)**: Illustrates the relationship between yearly growth in production and oil prices, highlighting key market trends.
+5. **Combination Chart (Yearly Growth Rate of Oil Production and Oil Prices)**: 
+This chart combines a line series and an area chart to show the relationship between the yearly growth rate of oil production and oil prices. From this chart, we can observe how the oil prices spiked during certain periods, such as between 1979 and 1981, while production exhibited a downward trend. This type of dual-axis visualization helps to draw correlations between production rates and market prices.
 
 #### Script Summary:
 ```python
@@ -232,7 +235,8 @@ chart.open()
 ```
 ![](Images/Yearly_Growth_Rate_of_Oil_Production_and_Oil_Prices.png)
 
-6. **Forecast Chart (Crude Oil Production Forecast 2018-2027)**: Projects future oil production using an ARIMA model.
+6. **Forecast Chart (Crude Oil Production Forecast 2018-2027)**: 
+This chart shows the forecasted crude oil production from 2018 to 2027, based on an ARIMA model. While the prediction shows a relatively stable trend with minor increases, it's important to note that the prediction might have limitations due to the limited features available in the dataset. This chart helps to project future trends and gives a glimpse into the potential future of oil production.
 
 #### Script Summary:
 ```python
@@ -267,7 +271,8 @@ chart.open()
 ```
 ![](Images/Crude_Oil_Production_Forecast_(2018-2027).png)
 
-7. **Real-Time Dashboard (Historical Crude Oil Production)**: Displays real-time production data and geographical distribution from 1971 to 2027.
+7. **Real-Time Dashboard (Historical Crude Oil Production)**: 
+This dashboard displays crude oil production for different countries across several years and combines two types of visualizations: a bar chart and a map chart. The bar chart shows production quantities, while the map highlights production intensity by country. This real-time chart updates continuously to show production data from 1971 to 2027, allowing for dynamic monitoring of production trends over time.
 
 #### Script Summary:
 ```python
