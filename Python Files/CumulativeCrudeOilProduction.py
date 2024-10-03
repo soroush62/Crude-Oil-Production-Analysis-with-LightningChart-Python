@@ -43,3 +43,4 @@ chart.get_default_y_axis().set_title('Crude Oil Production (KTOE)')
 legend = chart.add_legend(data=chart)
 
 chart.open()
+

@@ -90,4 +90,3 @@ x_axis.set_title('Year')
 
 chart.open()
 
-
